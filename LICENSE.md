@@ -1,6 +1,6 @@
 MIT License
 
-This game uses Godot Engine, available under the following license:
+This game uses [Godot Engine](https://godotengine.org/), available under the following license:
 
 Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2021
 Godot Engine contributors.
