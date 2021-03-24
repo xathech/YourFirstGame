@@ -35,9 +35,11 @@ func _process(delta):
 		$AnimatedSprite.play()
 		
 	else:
+		
 		$AnimatedSprite.stop()
 	
 	position += velocity * delta
+	# Limit position to screen size
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0, screen_size.y)
 	
@@ -57,6 +59,7 @@ func _process(delta):
 
 func _on_Player_body_entered(body):
 	
+	# When a Mob touches the player	
 	remaining_lives-=1
 	
 	emit_signal("hit",remaining_lives)
@@ -65,11 +68,12 @@ func _on_Player_body_entered(body):
 		hide()
 		emit_signal("game_over")
 		$CollisionShape2D.set_deferred("disabled", true)
-	else:		
+	else:
 		decrease_lives()
 	
 func start(pos):
 	
+	# Reset lives
 	remaining_lives = lives
 	emit_signal("hit",remaining_lives)
 	position = pos
@@ -80,15 +84,11 @@ func decrease_lives():
 	
 	# Disable collision
 	$CollisionShape2D.set_deferred("disabled", true)
-	# Halve sprite alpha
+	# Halve sprite alpha to indicate invulnerability
 	modulate.a = 0.5
-	# Print log
-	print("Invulnerable")
 	# Stop execution while timer is active
 	yield(get_tree().create_timer(3.0), "timeout")
 	# Restore sprite alpha
 	modulate.a = 1
 	# Enable collision
-	$CollisionShape2D.set_deferred("disabled", false)
-	# Print log
-	print("Vulnerable, ",remaining_lives," lives remaining")
+	$CollisionShape2D.set_deferred("disabled", false)	

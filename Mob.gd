@@ -11,10 +11,6 @@ func _ready():
 	$AnimatedSprite.animation = mob_types[randi() % mob_types.size()] # select random animation between 0 and n-1
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
+# When the Mob exits the screen
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
